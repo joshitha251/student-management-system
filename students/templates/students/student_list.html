@@ -10,6 +10,14 @@
     <div class="dashboard-page">
         <div class="dashboard-shell">
             <div class="dashboard-container">
+                {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                    <div class="flash-message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
                 <div class="dashboard-topbar">
                     <h1 class="dashboard-title">Student List</h1>
                     <a class="btn btn-primary btn-add" href="{% url 'add_student' %}">Add New Student</a>

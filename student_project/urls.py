@@ -10,3 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('students/', include('students.urls')),
 ]
+
+handler400 = 'students.views.error_400'
+handler403 = 'students.views.error_403'
+handler404 = 'students.views.error_404'
+handler500 = 'students.views.error_500'

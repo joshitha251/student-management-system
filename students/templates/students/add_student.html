@@ -20,6 +20,14 @@
             <form method="POST" class="edit-form">
                 {% csrf_token %}
 
+                {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                    <div class="flash-message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
                 <div class="edit-grid add-student-grid">
                     <div class="field">
                         <label class="edit-label" for="name">Student Name</label>

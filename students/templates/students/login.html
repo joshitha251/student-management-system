@@ -4,6 +4,14 @@
 
 <div class="login-page">
     <div class="login-card">
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash-message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         <div class="login-header">
             <div class="login-hey">Hey!</div>
             <div class="login-welcome">Welcome to Online Student Management System</div>

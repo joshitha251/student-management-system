@@ -1,10 +1,48 @@
-<h1>Add Marks for {{ student.name }}</h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Marks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="edit-page">
+        <div class="edit-shell">
+            <div class="edit-top-row">
+                <a class="back-link" href="{% url 'student_detail' student.id %}">← Back</a>
+            </div>
+            <div class="edit-header">
+                <h1 class="edit-title">Add Marks for {{ student.name }}</h1>
+            </div>
 
-<form method="POST">
-    {% csrf_token %}
+            <form method="POST" class="edit-form">
+                {% csrf_token %}
 
-    <input type="text" name="subject" placeholder="Subject"><br><br>
-    <input type="number" name="marks" placeholder="Marks"><br><br>
+                {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                    <div class="flash-message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
 
-    <button type="submit">Add</button>
-</form>
+                <div class="edit-grid add-student-grid">
+                    <div class="field">
+                        <label class="edit-label" for="subject">Subject</label>
+                        <input id="subject" class="input" type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="field">
+                        <label class="edit-label" for="marks">Marks (0-100)</label>
+                        <input id="marks" class="input" type="number" name="marks" placeholder="Marks" min="0" max="100" required>
+                    </div>
+                </div>
+
+                <div class="edit-actions">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

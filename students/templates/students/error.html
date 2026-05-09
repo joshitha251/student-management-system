@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error {{ code }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="register-page">
+        <div class="register-card">
+            <div class="register-header">
+                <div class="register-title">Error {{ code }}</div>
+                <div class="register-subtitle">{{ message }}</div>
+            </div>
+            <div class="edit-actions" style="justify-content: center;">
+                <a class="btn btn-primary" href="{% url 'student_list' %}">Go to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
