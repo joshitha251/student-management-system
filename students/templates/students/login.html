@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="login-page">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-hey">Hey!</div>
+            <div class="login-welcome">Welcome to Online Student Management System</div>
+        </div>
+
+        <form method="POST" class="login-form">
+            {% csrf_token %}
+
+            <div class="field">
+                <input
+                    class="input"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <input
+                    class="input"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+                Login
+            </button>
+        </form>
+
+        <p class="register-text">
+            Don't have an account?
+            <a class="link" href="/students/register/">Register</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

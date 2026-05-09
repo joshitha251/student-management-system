@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="register-page">
+        <div class="register-card">
+            <div class="register-header">
+                <div class="register-title">Create account</div>
+                <div class="register-subtitle">Register for Online Student Management System</div>
+            </div>
+
+            <form method="POST" class="register-form">
+                {% csrf_token %}
+
+                <div class="field">
+                    <input
+                        class="input"
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <input
+                        class="input"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <button class="btn btn-primary register-submit" type="submit">Register</button>
+            </form>
+
+            <p class="register-footer-text">
+                Already have an account?
+                <a class="link" href="{% url 'login' %}">Login</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

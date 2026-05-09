@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="edit-page">
+        <div class="edit-shell">
+            <div class="edit-top-row">
+                <a class="back-link" href="{% url 'student_detail' student.id %}">← Back</a>
+            </div>
+
+            <div class="edit-header">
+                <h1 class="edit-title">Edit Student</h1>
+            </div>
+
+            <form method="POST" class="edit-form">
+                {% csrf_token %}
+
+                <div class="edit-grid">
+                    <div class="field">
+                        <label class="edit-label" for="name">Student Name</label>
+                        <input id="name" class="input" type="text" name="name" value="{{ student.name }}">
+                    </div>
+
+                    <div class="field">
+                        <label class="edit-label" for="pin">Student PIN</label>
+                        <input id="pin" class="input" type="text" name="pin" value="{{ student.pin }}">
+                    </div>
+
+                    <div class="field">
+                        <label class="edit-label" for="age">Student Age</label>
+                        <input id="age" class="input" type="number" name="age" value="{{ student.age }}">
+                    </div>
+                </div>
+
+                <div class="edit-marks-header">
+                    <h2 class="edit-subtitle">Marks</h2>
+                    <button class="btn btn-primary add-mark-btn" type="button" id="add-mark-btn">Add Marks</button>
+                </div>
+
+                <div class="edit-marks-list" id="edit-marks-list">
+                    {% for mark in marks %}
+                    <div class="edit-mark-row">
+                        <input
+                            class="input"
+                            type="text"
+                            name="subject_{{ mark.id }}"
+                            value="{{ mark.subject }}"
+                        >
+
+                        <input
+                            class="input"
+                            type="number"
+                            name="marks_{{ mark.id }}"
+                            value="{{ mark.marks }}"
+                        >
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="edit-actions">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const addMarkBtn = document.getElementById('add-mark-btn');
+        const marksList = document.getElementById('edit-marks-list');
+
+        addMarkBtn.addEventListener('click', function () {
+            const row = document.createElement('div');
+            row.className = 'edit-mark-row';
+            row.innerHTML = `
+                <input
+                    class="input"
+                    type="text"
+                    name="new_subject"
+                    value=""
+                    placeholder="Subject name"
+                >
+                <input
+                    class="input"
+                    type="number"
+                    name="new_marks"
+                    value=""
+                    placeholder="Marks"
+                >
+            `;
+            marksList.appendChild(row);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="detail-page">
+        <div class="detail-shell">
+            <div class="detail-top-row">
+                <a class="back-link" href="{% url 'student_list' %}" aria-label="Back to student list">← Back</a>
+            </div>
+
+            <div class="detail-header">
+                <div class="detail-student-info">
+                    <div class="detail-title">Student Name: {{ student.name }}</div>
+                    <div class="detail-meta">Student PIN: {{ student.pin }}</div>
+                    <div class="detail-meta">Student Age: {{ student.age }}</div>
+                </div>
+
+                <div class="detail-actions">
+                    <a class="btn btn-primary detail-edit-btn" href="{% url 'edit_student' student.id %}">Edit Student</a>
+                </div>
+            </div>
+
+            <div class="marks-section">
+                <div class="marks-table-wrap">
+                    <div class="marks-row marks-head">
+                        <div class="marks-col marks-col-serial">Serial Number</div>
+                        <div class="marks-col marks-col-subject">Subject</div>
+                        <div class="marks-col marks-col-score">Marks</div>
+                    </div>
+
+                    {% for mark in marks %}
+                    <div class="marks-row marks-body">
+                        <div class="marks-col marks-col-serial">{{ forloop.counter }}</div>
+                        <div class="marks-col marks-col-subject">{{ mark.subject }}</div>
+                        <div class="marks-col marks-col-score">{{ mark.marks }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="marks-summary">
+                    <div class="summary-line">
+                        Total Marks : {{ total }} out of {% widthratio marks|length 1 100 %}
+                    </div>
+                    <div class="summary-line summary-percent">
+                        Percentage : {% widthratio total marks|length 1 %}%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

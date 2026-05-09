@@ -1,0 +1,10 @@
+<h1>Add Marks for {{ student.name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="subject" placeholder="Subject"><br><br>
+    <input type="number" name="marks" placeholder="Marks"><br><br>
+
+    <button type="submit">Add</button>
+</form>

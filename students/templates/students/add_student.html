@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <div class="edit-page">
+        <div class="edit-shell">
+            <div class="edit-top-row">
+                <a class="back-link" href="{% url 'student_list' %}">← Back</a>
+            </div>
+
+            <div class="edit-header">
+                <h1 class="edit-title">Add Student</h1>
+            </div>
+
+            <form method="POST" class="edit-form">
+                {% csrf_token %}
+
+                <div class="edit-grid add-student-grid">
+                    <div class="field">
+                        <label class="edit-label" for="name">Student Name</label>
+                        <input id="name" class="input" type="text" name="name" placeholder="Enter name">
+                    </div>
+
+                    <div class="field">
+                        <label class="edit-label" for="pin">Student PIN</label>
+                        <input id="pin" class="input" type="number" name="pin" placeholder="Enter PIN">
+                    </div>
+
+                    <div class="field">
+                        <label class="edit-label" for="age">Student Age</label>
+                        <input id="age" class="input" type="number" name="age" placeholder="Enter age">
+                    </div>
+                </div>
+
+                <div class="edit-actions">
+                    <button class="btn btn-primary" type="submit">Add Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

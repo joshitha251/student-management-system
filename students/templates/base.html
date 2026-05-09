@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <h1>Student Management System</h1>
+
+        <hr>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+</body>
+
+</html>
