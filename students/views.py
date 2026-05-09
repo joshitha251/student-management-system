@@ -4,6 +4,7 @@ from .models import Student,Mark
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 @login_required
@@ -111,37 +112,52 @@ def edit_student(request, id):
     })
 
 def register_user(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        # Check if the username already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists.')
+            return redirect('register')
+
+        # Create the user if the username is unique
         User.objects.create_user(
             username=username,
             password=password
         )
-
+        messages.success(request, 'User registered successfully.')
         return redirect('login')
 
+    # Render the registration page for GET requests
     return render(request, 'students/register.html')
+    
+    
+    
 
 def login_user(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+        # Check if the user exists
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'User does not exist. Please register first.')
+            return redirect('login')
 
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('student_list')
+            messages.success(request, 'Login successful.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password.')
+            return redirect('login')
 
+    # Render the login page for GET requests
     return render(request, 'students/login.html')
+
 
 @login_required
 def logout_user(request):
